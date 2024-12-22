@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
 
 
 // Route::get('/', function () {
@@ -15,6 +16,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified', 'role_or_permission:admin'])->group(function () {
     Route::resource('users', UserController::class);
+    Route::resource('category', CategoryController::class);
 });
 
 Route::middleware(['auth', 'verified', 'role_or_permission:user|admin'])->group(function () {

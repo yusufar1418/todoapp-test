@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -94,5 +95,17 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345678'),
         ]);
         $user->assignRole('user');
+
+        //CATEGORY
+
+        Category::create([
+            'name' => 'Life',
+            'slug' => 'life',
+        ]);
+
+        Category::create([
+            'name' => 'Work',
+            'slug' => 'work',
+        ]);
     }
 }
