@@ -49,4 +49,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    // Route Binding: Gunakan username untuk URL
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
 }
