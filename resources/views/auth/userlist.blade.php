@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Category List') }}
+            {{ __('User List') }}
         </h2>
         <br>
 
-        <a href="{{ route('category.create') }}"
+        <a href="{{ route('users.create') }}"
             class="inline-block font-bold py-2 px-4 bg-indigo-700 text-white rounded-full shadow-lg hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 transition">
             Add New
         </a>
@@ -32,34 +32,46 @@
                             <tr>
                                 <th class="border border-black px-4 py-2">No</th>
                                 <th class="border border-black px-4 py-2">Nama</th>
+                                <th class="border border-black px-4 py-2">Username</th>
+                                <th class="border border-black px-4 py-2">Email</th>
                                 <th class="border border-black px-4 py-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($categories as $category)
+                            @forelse ($users as $user)
                                 <tr>
                                     <td class="border border-black px-4 py-2">{{ $loop->iteration }}</td>
-                                    <td class="border border-black px-4 py-2">{{ $category->name }}</td>
+                                    <td class="border border-black px-4 py-2">{{ $user->name }}</td>
+                                    <td class="border border-black px-4 py-2">{{ $user->username }}</td>
+                                    <td class="border border-black px-4 py-2">{{ $user->email }}</td>
                                     <td class="border border-black px-4 py-2">
                                         <div class="hidden md:flex flex-row items-center gap-x-1">
-                                            <a href="{{ route('category.edit', $category) }}"
+                                            <a href="{{ route('users.edit', $user) }}"
                                                 class="inline-block font-bold py-1 px-2 bg-green-700 text-white shadow-lg hover:bg-green-800 focus:ring-4 focus:ring-indigo-300 transition">
                                                 Edit
                                             </a>
-
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="inline-block font-bold py-1 px-2 bg-red-700 text-white shadow-lg hover:bg-red-800 focus:ring-4 focus:ring-indigo-300 transition">
+                                                    Delete
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="border border-black px-4 py-2">Belum ada data terbaru</td>
+                                    <td colspan="5" class="border border-black px-4 py-2">Belum ada data terbaru</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                     <!-- Pagination Links -->
                     <div class="mt-4">
-                        {{ $categories->links() }}
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>

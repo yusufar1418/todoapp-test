@@ -24,6 +24,32 @@
                         </x-nav-link>
                     </div>
                 @endif
+
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('user'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('task.index')" :active="request()->routeIs('task.index')">
+                            {{ __('To Do List') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('task.schedule')" :active="request()->routeIs('task.schedule')">
+                            {{ __('Schedule List') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('task.history')" :active="request()->routeIs('task.history')">
+                            {{ __('History List') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('task.all')" :active="request()->routeIs('task.all')">
+                            {{ __('All Task List') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->

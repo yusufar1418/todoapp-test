@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -15,6 +16,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderByDesc('id')->paginate(10);
+        return view('auth.userlist', compact('users'));
+
+        $userId = Auth::id(); // ID pengguna yang sedang login
+        $users = User::where('id', '!=', $currentuserId) // Tidak termasuk pengguna yang sedang login
+            ->orderByDesc('id')
+            ->paginate(10);
+
         return view('auth.userlist', compact('users'));
     }
 
